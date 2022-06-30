@@ -1,2 +1,2 @@
 # dev-notes
-![git squash]("git squash".png)
+![git squash](squash.png)
