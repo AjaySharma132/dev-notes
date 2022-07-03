@@ -1,0 +1,30 @@
+docker run -p 8085:8080 -e SWAGGER_JSON="D:\trainman\api documentation\tmcash-balance.json" -v "D:\trainman\api documentation" swaggerapi/swagger-ui
+docker run -p 80:8080 -e "SWAGGER_JSON=/api.json" -v /actual/path/to/api.json:/api.json swaggerapi/swagger-ui
+docker run -p 80:8080 -e "SWAGGER_JSON=D:\trainman\api documentation\tmcash-balance.json" -v "D:\trainman\api documentation\tmcash-balance.json" swaggerapi/swagger-ui
+docker run -p 80:8080 -e "SWAGGER_JSON=D:\trainman\api documentation\tmcash-balance.json" -v "D:\trainman\api documentation\tmcash-balance.json" swaggerapi/swagger-ui
+docker run -p 80:8080 -e "SWAGGER_JSON="tmcash-balance.json"" -v "D:\trainman\api documentation\tmcash-balance.json" swaggerapi/swagger-ui
+docker run -p 80:8080 -e "SWAGGER_JSON='D:\trainman\api documentation\tmcash-balance.json'" -v "D:\trainman\api documentation\tmcash-balance.json" swaggerapi/swagger-ui
+
+docker run -p 80:8080 -e "SWAGGER_JSON=/metadata.json" -v "D:\trainman\api\metadata.json:/metadata.json" swaggerapi/swagger-ui
+docker run -p 8085:8080 -e "SWAGGER_JSON=\metadata.json" -v "D:\trainman\api:\metadata.json" swaggerapi/swagger-ui
+
+
+docker run -p 8085:8080 -e SWAGGER_JSON=/foo/swagger.json -v `pwd`:/foo swaggerapi/swagger-ui
+docker run -p 8085:8080 -e SWAGGER_JSON=/api/metadata.json -v "%cd%":/api/metadata.json swaggerapi/swagger-ui
+
+
+docker run -p 8085:8080 -e SWAGGER_JSON="D:\trainman\api\metadata.json" -v `pwd`:"D:\trainman\api" swaggerapi/swagger-ui
+
+
+docker run -p 80:8080 -e SWAGGER_JSON=/tmp/swagger.yaml -v `pwd`/src/app/swagger:/tmp swaggerapi/swagger-ui
+
+
+<-----Working----->
+docker run -p 8000:8080 -e SWAGGER_JSON=/api/metadata.json -v "D:\trainman\api":/api swaggerapi/swagger-ui
+docker run -p 80:8080 -e "SWAGGER_JSON=/metadata.json" -v "D:\trainman\api\metadata.json:/metadata.json" swaggerapi/swagger-ui
+
+
+
+
+docker run -p 8085:8080 -e SWAGGER_JSON=/api/metadata.json -v "D:\trainman\api":/api swaggerapi/swagger-ui
+
