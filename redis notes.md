@@ -68,7 +68,7 @@ CACHES = {
 CACHE_TTL = 60 * 1500 
 ```
 
-![redis](redis3)
+![redis](images/redis/redis3.jpg)
 
 Inside views.py - 
 ```
@@ -86,13 +86,13 @@ cache.set("foo", "value", timeout=25)
 cache.ttl("foo") -> 25
 cache.ttl("not-existent") -> 0
 ```
-![redis](redis1)
+![redis](images/redis/redis1.jpg)
 <br>
-![redis](redis2)
+![redis](images/redis/redis2.jpg)
 <br>
-![redis](redis4)
-![redis](redis5)
-![redis](redis6)
+![redis](images/redis/redis4.jpg)
+![redis](images/redis/redis5.jpg)
+![redis](images/redis/redis6.jpg)
 
 
 An example of using redis with django - 
