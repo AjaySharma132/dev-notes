@@ -220,3 +220,10 @@ Undo the changes -
 ![reset](images/git/reset7.jpg)
 
 ![reset](images/git/reset8.jpg)
+
+![reset](images/git/reset9.jpg)
+
+![reset](images/git/reset10.jpg)
+
+![reset](images/git/reset11.jpg)
+
