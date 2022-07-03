@@ -1,0 +1,36 @@
+git is used to maintian the history of a project. And all this history is stored inside a hidden directory called .git, To intialize a directory as a git repository, run the following -
+git init -> creates a .git folder 
+
+Suppose we create a new file named test.txt inside our git repo. Now, this file is untracked as of now i.e. Noone knows that we have created a file named test.txt . We can check the status using the command -
+git status -> list the status of changes inside the git repo
+
+Now, Imagine a wedding scenario where the photographer is clicking pictures of guests on stage. So, this is kinda similar - we are first moving the changes to the staging area from where their picture can be clicked and the command for the same is as follows -
+git add . -> adds all the untracked files to the staging area
+git add test.txt -> adds the file test.txt to the staging area
+
+Then, the photographer clicks the picture of the guests on stage, so this step is similar to that, we are commiting the changes i.e. saving their snapshot.
+git commit -m "added file test.txt" -> commits the changes i.e. saves the snapshot of these changes
+
+Now, suppose we have moved some files to the staging area but now we don't wanna commit them, so we have to remove them from the staging area, for that we run the following command -
+git restore --staged test.txt -> removes the file named test.txt from the staging area
+
+To see the history of project i.e. to see what all commits were made into the project, we run the following command -
+git log
+
+Now, let's suppose we deleted a file named test.txt - 
+rm test.txt
+
+git will detect this change and when we run git status - we can see that this change is intially untracked. So, we will run git add to move it to the staging area and then commits this change as -
+git add test.txt
+git commit -m "deleted test.txt"
+
+what if I wanna undo the above change i.e. move back to the time when I have not deleted 'test.txt'. To do so, we move back to a commit earlier than the commit, we wanna remove. So, run git log and copy the commit id of the commit to which we wanna move to. And then run the following command -
+git reset e1858f13759f7ea6a06b2e80850abbdc09a9e01c -> moves our repo to the specified commit, deleting all the commits ahead of it and unstages the changes made after this commit.
+
+Now, the above command will only remove the commits, it will not undo the changes that means the changes are still there but untracked. So, if we want to undo the changes, we have to discard the untracked changes in our working directory, for that run the following command - 
+git restore test.txt -> discards the changes in working directory that means now the file is restored back which was deleted earlier. 
+
+
+
+
+
