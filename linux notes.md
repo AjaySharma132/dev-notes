@@ -1,0 +1,620 @@
+﻿```
+root@localhost:~# ls
+```
+
+```
+root -> name of user
+localhost -> ip address of server
+: -> separator
+~ -> user's home directory(we are initially into)
+# -> separator
+```
+```
+ls -> list all contents of cwd
+```
+```
+cd test -> move into test directory
+```
+```
+cd .. -> move one directory up
+```
+```
+/ -> root directory (top most directory and everything is stored in here)
+
+/ contains ->
+    bin -> contains all user executable files
+    boot -> contains all the files required to boot the operating system
+    dev -> stores information about the hardware devices that are connected to this machine not drivers but just information.
+    etc -> contains local system configuration files for the host computer
+    home -> home directory storage for user files. root user is the superuser in linux. but home doesn't contains home files for root user since he is a superuser that's why root user's home files are located differently in linux, they are inside root/home folder. but this home directory does contains home files for other normal users.
+    lib -> contains library files that are required to boot the system.
+    media -> this is where we gonna mount external media devices like usb
+    mnt -> this is where we gonna mount temporary file systems
+    opt -> contains optional files
+    sbin -> contains system binary files and are executable. Used for system administrator.
+    tmp -> contains temporary files. Can be deleted in any point of time.
+    usr -> used for sharable read only files
+    var -> used by a lot of database software and stores variable data files.
+```
+```
+mkdir abc -> creates a directory named abc
+```
+```
+touch newfile.txt -> creates an empty file named newfile.txt
+```
+```
+pwd -> prints the current working directory
+```
+```
+cat file.txt -> prints the contents of file.txt
+```
+```
+cat >> file.txt -> prompts us for some content and concatenates or appends the content to the end of the file. for closing the prompt, press ctrl+d. If the file doesn't exist, it will create that file.
+```
+```
+cat file1 >> file2 -> appends the content of file1 to the end of file2.
+```
+```
+mv from_path to_path -> move the file or folder specified in place of from_path to the directory specified in place of to_path
+```
+```
+mv file1_path file2_path file3_path to_path -> move multiple files - file1, file2, and file3 to the directory specified in place of to_path.
+```
+```
+cat file1 file2 -> copy file1 and create a new file with same contents and name it as file2. If file2 already exists, override it.
+```
+```
+rm file1 -> remove file1
+```
+```
+rm -i file1 -> remove file1 but first ask for a confirmation(i - interactive)
+```
+```
+rm -d dir1 -> removes dir1 directory but it should be empty.
+```
+```
+rm -r dir1 -> removes dir1 directory even if it contains some files/folders.(r - recursive)
+```
+```
+rmdir dir1 -> similar to rm -d dir1
+```
+```
+rm *.txt -> removes every text file.
+```
+```
+rm test.* -> remove every file whose name start with test no matter what its extension is.
+```
+```
+rm *.* -> removes all files but don't delete directories.
+```
+```
+find . -name a.txt -> find a file in the current directory whose name is a.txt
+```
+```
+find . -name "*.txt" -> find all text files inside current directory
+```
+```
+find . -name a.txt -> look for file named exactly A.txt. Cases do matter here.
+```
+```
+find . -iname A.txt -> look for a file named either a.txt or A.txt. Cases doesn't matter.
+```
+```
+find . -type d  -name test -> look for type, directory whose name is test in the current directory.
+```
+```
+adduser tim -> add a user tim
+```
+```
+etc/passwd -> stores all the information about users on the system.
+```
+```
+logout -> to close the session
+```
+```
+/home/tim -> all files of user tim are stored here
+```
+```
+deluser tim -> delete the user tim
+```
+```
+passwd tim -> updates the password of user, tim
+```
+
+**Group** -> is a collection of users that all have the same permissions. A user has a primary group and a secondary group. Whenever a user is created, it's added to a group that is unique and has the same name as of user. So, a root user has a primary group, which is called root. A user can have only 1 primary group and at max 15 secondary groups. A file created by a user is owned by that user's primary group.
+
+```
+addgroup python -> adds a group python
+```
+```
+usermod -a -G python tim -> append a user tim to group python (a - append, G - group)
+```
+```
+groups tim -> list all groups that user, tim is assigned to 
+```
+```
+gpasswd -d tim python -> remove user tim from group python
+```
+```
+delgroup python -> remove group python
+```
+
+**editing permission for a group** -> all permissions for a group are stored in a file called sudoers
+```
+visudo -> open the sudoers file and then we can actually start modifying 
+In nano, ctrl+s to save file and ctrl+x to exit the file 
+```
+```
+which cat -> tells us the location of cat command. It could be any command in place of cat.
+```
+```
+ls -l -> tells detailed information about contents of a directory
+```
+```
+drwxr-xr-x    1(no of files in this directory) root(the user who owns or created this file)     root(the group that this file belongs to)          4096(size of the file or directory) Jun 20 16:22(time at which this was created at) abc(name of directory or file)
+```
+```
+drwxr-xr-x -> this is the file permission. so the first char stands for what type of file this is. 'd' stands for directory, '-' means a regular file. then there are 9 char(3 sets of 3 char each), which represents the file permission. 'r' means read, 'w' means write, 'x' means execute. Among the 3 sets, 1st set stands for the permissions of user who created or own this file, 2nd set stands for the permissions of group that this file belongs to, 3rd set stands for all users permissions.
+```
+So, as a root user or a user who owns the file, one can modify the permission of that file. To do that, we use a command called '**chmod**' which stands for change mode.
+
+```
+chmod [who][+,-,=][permission(s)] filename
+```
+for changing permissions of all the contents inside a directory use the -R  flag as:
+```
+chmod -R [who][+,-,=][permission(s)] dirname
+```
+```
+u - user, g - group, o - other(users other than who created the file or who belongs to that file group are called others), a - all(means literally all users including the file group users as well as file owner).
+```
+```
+Eg-> change permissions of a file named abc.txt such that all users can write to this file. 
+Ans->  chmod a+w abc.txt
+
+Eg-> change permission of a file named abc.txt such that only creator can execute that file.
+Ans-> chmod u+x abc.txt
+
+Eg-> change permission of a directory named dir such that everyone has to access to write to all it's contents.
+Ans-> chmod -R a+w dir
+
+Eg-> change permission of a directory named dir such that noone has to access to write to any of it's contents.
+Ans-> chmod -R a-w dir
+
+Eg-> change permission of a file named abc.txt such that all users does only have the access to only write to this file.
+Ans-> chmod a=w abc.txt
+
+Eg-> change permission of a file named abc.txt such that all users does only have the access to only read and write to this file.
+Ans-> chmod a=wr abc.txt
+
+chmod +x abc.txt -> by default, modifies the permissions for all. 
+
+chmod g+w,o-rw,a+x abc.txt -> modify multiple permissions at the same time.
+```
+
+
+```
+top -> shows all running processes on the machine. (Also shows the up time of machine + no of users on the machine + cpu usage, memory usage, etc.) Also, shows how much cpu usage, memory usage, a process is taking up + the user who ran that process + the process id. Press ctrl+c to exit.
+```
+```
+'apt' stands for advanced packaging tool. This is what we use in linux to manage packages. 'apt-get' is same as 'apt' but just an older version of it.
+```
+```
+htop -> same as top but provider better visualization. press f3 for searching a process. So, when we try to kill a process in linux, what we actually do is to send a signal to the process and the process inteprets that signal and does something with it. Press f9 for sending a signal. use 'SIGTERM' signal to kill a process. 
+```
+```
+killall process_name -> kills the process whose name is mentioned 
+```
+```
+kill process_id -> kills the process whose id is specified
+```
+```
+ps -> stands for process status and shows all running process that are ran by the root user(only the root user) and not system.
+```
+```
+ps a -> shows all running process that belong to any user on the system and not just the root.
+```
+```
+ps au -> also display the user associated with a running process.
+```
+
+```
+ifconfig -> gives information about network interface devices.
+```
+```
+ip -4 addr -> gives ipv4 addr of the machine
+```
+```
+ip -6 addr -> gives ipv6 addr of the machine
+```
+```
+netstat -> gives detailed information about network activity on our linux machine
+```
+```
+netstat -a -> gives information about all the listening ports for tcp and udp connections
+```
+```
+netstat -at -> gives information about all the listening ports for tcp only
+```
+```
+netstat -l -> shows all active ports
+```
+```
+netstat -u -> gives information about all the listening ports for udp only
+````
+#### curl command is used to test out an endpoint or send a request to a url
+```
+curl https://techwithtim.net -> sends a get request to https://techwithtim.net
+```
+```
+curl -X POST http://techwithtim.net -> sends a post request to https://techwithtim.net (-X is used to specify the method)
+```
+```
+curl -X POST --data "p1=value1&p2=value2" http://techwithtim.net -> sends data along with post request to https://techwithtim.net
+```
+```
+curl -X POST -d parm1=value -d parm2=value https://techwithtim.net -> sends data along with post request to https://techwithtim.net
+```
+```
+curl -o file_name url -> saves the response we get from the url, to the file specified.
+```
+```
+curl -I url -> shows only the header of the response, we get from the url
+```
+```
+curl --header "Content-type:application/json" -X POST -d parm1=val http://techwithtim.net -> sends header along with the request
+```
+```
+ping url -> sends packets to the url and check if they are giving us some kind of response, we don't care what the response is. We are just checking if we are getting something or not(to see if that domain is online/active or is it blocking our request)
+```
+```
+ping google.com -> sends packets to google.com
+```
+
+**RSA key authentication** -> In this type of authentication, we don't need to use password to login to our remote server. Instead, we use a pair of public and private keys to login. A public key is stored on the server and the private key is stored on the local machine. And then on the server we do have to specify the passphrase for key matching everytime we login. So, if the keys matches successfully, we are logged in to the remote server. More secure than using password,
+
+An FTP(file transfer protocol) client provides an easy way to move files between our remote server and the local machine.
+
+```
+env -> prints out all the environment variables(used to store things specific to the environment, we are in) on the machine.
+```
+```
+printenv name_of_var -> prints out the value of the env variable specified
+```
+```
+echo $name_of_var -> another way to print out the value of the environment variable specified. echo just prints out whatever on the right hand side of it, to the console. $ is just used to get the value of the env variable specified and echo is used to print out that value.
+```
+```
+export TEST=1 -> creates a environment variable named TEST with value equal to 1. But this environment variable gets destroyed as soon as we close the session i.e. it's a temporary env variable.
+```
+```
+export TEST=2 -> can also be used to change the value of an existing environment variable. change value of TEST var to 2.
+```
+
+To create a permanent environment variable, we need to modify a file, already existing on our machine=>
+
+```
+nano .bashrc -> open .bashrc(hidden file, presents inside the user's home directory) into the nano text editor. Inside that file, write anywhere-
+```
+```
+export TIM="does this work!"  
+(note- '!' is used since we have more than one word). Press Ctrl+S, Ctrl+X to save and exit.
+```
+now, do run the following command -
+```
+source .bashrc -> updates/source/run the .bashrc file. This is done in order to take place the changes we made.
+```
+
+Now, we have successfully set the environment variable 'TIM' for a specific user(the user we are logged in as). But how to set a global environment variable that can be used by any user on the system? let's see how can we do this-
+```
+cd etc
+```
+```
+nano environment -> opens environment file in nano. Inside environment, write -
+```
+```
+export HELLO="WORLD" 
+Now, save and exit the file.
+```
+Now, to source the file, run-
+```
+source environment
+```
+Now, to test we can do-
+```
+echo $HELLO - prints out WORLD
+```
+```
+unset env_var_name -> used to remove a session environment variable. To remove a permanent environment variable, we need to modify the files again.
+```
+
+
+### Text Editors in linux - 
+
+1. nano
+```
+nano file_name -> opens the file if it already exists else it first creates the file and then opens it in nano
+ctrl + s -> saves the file
+ctrl + o -> for save as. It then prompts us for the file name if we wanna cancel, press ctrl+c
+ctrl + g -> to look for all the keyboard shortcuts
+ctrl + ^ -> to select text (just press 6 above alphabets to use ^ after ctrl)
+alt + ^ ->  to copy selected text
+ctrl + u -> to paste 
+ctrl + k -> to cut selected text
+ctrl + x -> to exit
+```
+2. vim
+```
+vim file_name -> opens the file if it already exists else it first creates the file and then opens it in vim
+there are two modes in vim - Insert mode(modify the file), Command mode(commands to the editor)
+To enter into insert mode, press i. And to enter into command mode, press esc.
+
+To save and exit, come inside command mode and press
+:wq
+
+To exit without saving, come inside command mode and press
+:q!
+
+To highlight/select text, come inside command mode and press
+v
+
+To copy highlighted text- Inside command mode and press
+y
+
+To paste- Inside command mode, press
+p
+
+To deleted selected text- Inside command mode, press
+d
+
+To undo - Inside command mode, press
+u
+
+To redo - Inside command mode, press
+ctrl+r
+
+To move forward one word - Inside command mode, press
+w
+
+To move back one word - Inside command mode, press
+b
+
+To move to beginning of line - Inside command mode, press
+0
+
+To move to end of line - Inside command mode, press
+$ (simply press shift + 4(above alphabets))
+```
+```
+Note - If we are signed in as the root user, we don't need to use sudo but otherwise we have to. sudo stands for super user do. To use sudo, we need to be added to sudo group.
+```
+
+3. emacs
+```
+To install emacs, use
+sudo apt-get install emacs
+
+To close emacs, press
+ctrl+z
+```
+
+
+#### grep command allows us to search for a pattern inside a file, console output etc. 
+```
+(syntax -> grep pattern file)
+```
+```
+grep A tim.txt -> searchs for A in tim.txt and outputs the line which contains A.
+```
+```
+grep A.A tim.txt -> search for A with any char in between and then A again, inside tim.txt
+```
+```
+grep [A,B].A tim.txt -> search for anything that starts with A or B with any char in between and then A again, inside tim.txt
+```
+A good practice using with grep is to put the pattern inside "" marks.
+```
+grep "A.B\|C.B" tim.txt -> looks for either A.B or C.B inside tim.txt (\| means OR)
+```
+```
+grep "AB$" tim.txt -> looks for AB at the end of a line in tim.txt
+```
+```
+grep "^AB" tim.txt -> looks for AB at the beginning of a line in tim.txt
+```
+```
+grep -n "ABC" tim.txt -> looks for ABC inside tim.txt and prints out the line number as well along with line. (-n stand for line number)
+```
+```
+grep -o "AB" tim.txt -> looks for AB inside tim.txt and doesn't print out the whole line instead only prints out the matching pattern for that line.
+```
+```
+grep -C 4 "AB" tim.txt -> looks for AB inside tim.txt and shows 4 lines surrounding every match
+```
+```
+ls | grep pattern -> filters out the output of ls with the given pattern
+```
+```
+cat file_name | grep pattern -> filters out the output of cat with the given pattern
+```
+```
+grep -r pattern dir_name -> looks inside every file of the directory specified, for the given pattern.
+```
+
+
+
+### Shell Scripts - 
+
+All shell scripts/files ends in .sh extension.
+
+Open a file say test.sh in vim/nano -
+
+At the top of that file, write 
+```
+#!/bin/bash -> which signifies which shell we wanna run this script in. There are multiple shells, bash is one of them. This line is not a comment since it does have ! after #.
+```
+To write a comment use # as
+```
+# this is a comment
+```
+Anything we can write inside our terminal/bash, we can write that inside a shell script. And all those commands will execute as a script here.
+```
+echo "hello world"
+echo "inside shell script"
+```
+To run a shell script
+```
+./name_of_script 
+for example- ./test.sh
+```
+To declare a function inside the shell script, do it as
+```
+name_of_func()
+{
+    echo "inside function"
+}
+```
+To call a function, simply write the name of function without any () as
+```
+name_of_func
+```
+To access a variable, use $ inside shell script the same way we used to do with env variables.
+
+To pass arguments to a function
+```
+name_of_func hello world -> Passes two variables "hello" and "world" to the function. Multiple arguments are separated by spaces.
+```
+```
+name_of_func "hello world" -> Passes a string "hello world" to the function
+```
+To access passed arguments inside a function use
+```
+$1 -> to access the first argument
+$2 -> to access the second argument
+$3 -> to access the third argument and so on..
+```
+
+defining a variable inside shell script 
+```
+name_of_var = val
+for example: x=6
+```
+variables names cannot contains exclamation points, spaces and cannot start with numbers.
+
+Printing/accessing the variables inside shell script
+```
+echo $name_of_var
+echo $x -> prints 6
+```
+Good practice to end the program with exit codes. So, at the end of the shell script, write
+```
+exit 0 -> exits the program as soon as this line is encountered and the program exits with code 0 means runs successfully. If code is 1 then conventionally, it means failure.
+```
+control statements inside shell scripts, let's write the control statements inside a function
+```
+control(){
+    if [[ $1 = "Tim" ]]; then
+        echo "Tim is great"
+    elif [[ $2 = "joe" ]]; then 
+        echo "Joe is great"
+    else
+        echo "noone is great"
+    fi
+}
+```
+Notice an if statement is always followed by fi, use [[]] to write expressions, use ; after writing expressions. Now, let's call the above function as
+```
+control "Tim"
+control "Benner"
+control "Bill" "Joe"
+```
+To take user input inside shell scripts
+```
+read -p "Name: " text -> here -p stands for prompt i.e. "Name: " here otherwise it will just show an empty line. Also, text is the variable name where we wanna store the user input value. The var name could be anything.
+```
+```
+read text -> input without any prompt
+```
+
+
+
+#### cronjob is a command that is scheduled to run at a specified time, cronjob is managed by crontab. 
+every user on the system has their specific crontab.
+
+To view the crontab, write
+```
+crontab -l
+```
+To edit crontab, write
+```
+crontab -e 
+```
+syntax of a cronjob is 
+```
+m h dom mon dow command
+```
+
+```
+uptime -> shows the uptime of the system
+```
+```
+wall msg -> broadcast a message to all users on the linux machine
+```
+```
+write name_of_user -> To send messages to a specific user. Whatever the sender type after this command is sent as a message to the specified user. To stop, press ctrl+c.
+```
+
+#### mesg command is used to enable or disable the ability to receive messages. Use it as
+```
+mesg n - disable messages
+mesg y - enable messages
+```
+```
+who - shows all users who are logged into the system
+```
+```
+free - shows all the system resources being used 
+```
+
+#### sort command is used to arrange lines in a file
+```
+sort tim.txt -> displays the lines of file, tim.txt in ascending order
+```
+```
+sort -r tim.txt -> displays the lines of file, tim.txt in descending order
+```
+```
+shutdown -h time -> shuts down the linux machine at the specified time
+```
+```
+shutdown -h now -> shuts down the linux machine right now
+```
+```
+shutdown -h +10 -> shuts down the linux machine in 10 minutes
+```
+```
+shutdown -r now -> restarts the linux machine right now
+```
+#### man command is used to bring up the manual for different commands
+```
+man ls -> brings up the manual for ls command. Press q to close the manual
+```
+
+#### whatis command gives a brief description of a command
+```
+whatis ls -> gives a short description of ls command
+```
+
+#### tail command is used to show the last 10 lines of a file
+```
+tail tim.txt -> shows the last 10 lines of a file named tim.txt
+```
+```
+tail -n 3 tim.txt -> shows the last 3 lines of a file named tim.txt
+```
+
+
+
+nginx forwards requests that are coming to the public ip address of this server to our local web server.
+
+gunicorn is a python web server gateway interface. forwards the requests from nginx server to our flask application. Allows our flask application to run on multiple cores.
